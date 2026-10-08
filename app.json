@@ -2,6 +2,8 @@
   "expo": {
     "name": "HukukSiter",
     "slug": "hukuksiter",
+    "owner": "gustavolit",
+    "extra": { "eas": { "projectId": "e0dca126-242f-4f37-a53f-f759c76bf162" } },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
