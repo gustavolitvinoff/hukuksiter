@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "HukukSiter",
+    "slug": "hukuksiter",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.hukuksiter.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FFF4EC",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.hukuksiter.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router",
+      "@react-native-community/datetimepicker",
+      [
+        "expo-notifications",
+        {
+          "color": "#E8735A",
+          "defaultChannel": "default"
+        }
+      ]
+    ],
+    "scheme": "hukuksiter",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFF4EC"
+    },
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}
