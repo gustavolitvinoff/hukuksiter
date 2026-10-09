@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 import {
   ActivityIndicator,
   I18nManager,
+  KeyboardAvoidingView,
+  Platform,
   Pressable,
   ScrollView,
   StyleProp,
@@ -71,16 +73,27 @@ export function Screen({
 }) {
   return (
     <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
-      {scroll ? (
-        <ScrollView
-          contentContainerStyle={[styles.screen, style]}
-          keyboardShouldPersistTaps="handled"
-        >
-          {children}
-        </ScrollView>
-      ) : (
-        <View style={[styles.screen, { flex: 1 }, style]}>{children}</View>
-      )}
+      {/* La pantalla se achica cuando aparece el teclado, y el campo donde
+          se está escribiendo queda siempre visible arriba del teclado */}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'android' ? 'padding' : undefined}
+        enabled={Platform.OS === 'android'}
+      >
+        {scroll ? (
+          <ScrollView
+            contentContainerStyle={[styles.screen, style]}
+            keyboardShouldPersistTaps="handled"
+            keyboardDismissMode="on-drag"
+            // En iPhone el sistema mueve la pantalla solo hasta el campo activo
+            automaticallyAdjustKeyboardInsets
+          >
+            {children}
+          </ScrollView>
+        ) : (
+          <View style={[styles.screen, { flex: 1 }, style]}>{children}</View>
+        )}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
