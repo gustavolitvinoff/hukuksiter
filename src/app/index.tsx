@@ -7,5 +7,5 @@ export default function Index() {
   if (loading) return <Loading />;
   if (!session) return <Redirect href="/login" />;
   if (!profile) return <Loading />;
-  return <Redirect href={profile.role === 'babysitter' ? '/availability' : '/search'} />;
+  return <Redirect href={profile.role === 'babysitter' ? '/bookings' : '/search'} />;
 }

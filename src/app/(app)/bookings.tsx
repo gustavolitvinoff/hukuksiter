@@ -2,6 +2,7 @@ import { useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { Linking, RefreshControl, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useAuth } from '@/auth/AuthProvider';
 import { Button, Card, colors, Message, Pill, Row, T } from '@/components/ui';
 import { useI18n } from '@/i18n/I18nProvider';
 import { confirm } from '@/lib/confirm';
@@ -20,6 +21,7 @@ const statusColors: Record<BookingStatus, { fg: string; bg: string }> = {
 export default function Bookings() {
   const { t } = useI18n();
   const { version } = useUnread();
+  const { profile } = useAuth();
   const [items, setItems] = useState<MyBooking[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -162,7 +164,9 @@ export default function Bookings() {
       >
         <T variant="title">{t('bookingsTitle')}</T>
         {!!error && <Message kind="error" text={error} />}
-        {loaded && items.length === 0 && <Message text={t('noBookings')} />}
+        {loaded && items.length === 0 && (
+          <Message text={profile?.role === 'babysitter' ? t('sitterEmpty') : t('noBookings')} />
+        )}
 
         {upcoming.length > 0 && <T variant="h2">{t('upcoming')}</T>}
         {upcoming.map(renderCard)}

@@ -155,6 +155,8 @@ create trigger on_auth_user_created
 
 -- ---------------------------------------------------------------------
 -- BÚSQUEDA: babysitters libres en una fecha y horario
+-- Una babysitter está libre si NO tiene un pedido aceptado que se superponga
+-- (aunque sea en parte) con el horario buscado.
 -- ---------------------------------------------------------------------
 create or replace function public.search_babysitters(p_date date, p_start time, p_end time)
 returns table (id uuid, first_name text, last_name text, age int)
@@ -167,13 +169,6 @@ language sql stable security definer set search_path = public as $$
     and p_end > p_start
     and p.role = 'babysitter'
     and p.id <> auth.uid()
-    and exists (
-      select 1 from public.availability a
-      where a.babysitter_id = p.id
-        and (a.on_date = p_date or a.weekday = extract(dow from p_date)::int)
-        and a.start_time <= p_start
-        and a.end_time   >= p_end
-    )
     and not exists (
       select 1 from public.bookings b
       where b.babysitter_id = p.id

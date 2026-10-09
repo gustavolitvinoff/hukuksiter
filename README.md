@@ -3,7 +3,7 @@
 App para conectar familias de la comunidad con babysitters. En hebreo e inglés.
 
 - **Familias**: eligen fecha y horario, ven qué babysitters están libres (nombre, apellido y edad) y les mandan un pedido.
-- **Babysitters**: marcan sus horarios libres, reciben el pedido con una notificación y aceptan o rechazan.
+- **Babysitters**: no configuran horarios. Reciben el pedido con una notificación y aceptan o rechazan.
 - **El teléfono** de cada uno aparece recién cuando el pedido se acepta (está protegido en la base de datos, no solo oculto en pantalla).
 
 Hecha con **Expo** (React Native) + **Supabase** (base de datos y usuarios, gratis).
@@ -126,11 +126,11 @@ npx eas-cli@latest submit --platform android
 
 - `login`, `register` (familia o babysitter), `forgot` (recuperar contraseña con código)
 - Familia: **Buscar** → **Pedidos** → **Alertas** → **Perfil**
-- Babysitter: **Mis horarios** → **Pedidos** (aceptar/rechazar) → **Alertas** → **Perfil**
+- Babysitter: **Pedidos** (aceptar/rechazar) → **Alertas** → **Perfil**
 
 **Reglas importantes (las hace cumplir la base de datos)**
 
-- Una babysitter aparece en la búsqueda solo si marcó ese día (semanal o fecha puntual) cubriendo **todo** el horario pedido, y no tiene otro pedido aceptado que se superponga.
+- Una babysitter aparece en la búsqueda si **no** tiene un pedido aceptado que choque con el horario buscado, aunque sea en parte.
 - Cuando acepta un pedido, se rechazan solos los otros pedidos pendientes que se superponen con ese horario.
 - El teléfono de la otra persona solo se entrega cuando el pedido está **aceptado**.
 - La notificación push llega en el idioma que eligió quien la recibe.

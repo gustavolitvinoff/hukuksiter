@@ -33,10 +33,6 @@ function AppTabs({ isSitter }: { isSitter: boolean }) {
         name="search"
         options={{ title: t('tabSearch'), tabBarIcon: icon('🔍'), href: isSitter ? null : undefined }}
       />
-      <Tabs.Screen
-        name="availability"
-        options={{ title: t('tabAvailability'), tabBarIcon: icon('🗓️'), href: isSitter ? undefined : null }}
-      />
       <Tabs.Screen name="bookings" options={{ title: t('tabBookings'), tabBarIcon: icon('📋') }} />
       <Tabs.Screen
         name="notifications"
