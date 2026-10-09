@@ -6,4 +6,4 @@
 // la seguridad la da la base de datos (schema.sql).
 
 export const SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';
-export const SUPABASE_ANON_KEY = 'PEGAR-ACA-LA-ANON-KEY';
+export const SUPABASE_ANON_KEY = 'sb_publishable_4Wf1BwbeAq72ZpQ-5qkbew_0PFKUMfp';
